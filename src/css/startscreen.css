@@ -1,0 +1,59 @@
+/* StartScreen.css */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Prevents scrollbars from appearing if the content is larger than the screen */
+    background-color: black;
+    /* Ensures the background is black even outside of .startScreen */
+    height: 100%;
+    /* Ensures the body takes full viewport height */
+    width: 100%;
+    /* Ensures the body takes full viewport width */
+}
+
+.startScreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* Use full screen height */
+    width: 100vw;
+    /* Use full screen width */
+    background-color: black;
+    /* Set background color to black */
+    margin: 0;
+    /* Override any default margins */
+    padding: 0;
+    /* Override any default padding */
+}
+
+.startImage {
+    width: 150px;
+    /* Set a fixed width for the image */
+    height: auto;
+    /* Maintain aspect ratio */
+    object-fit: contain;
+    /* Ensure the image is fully visible without being stretched */
+    cursor: pointer;
+    /* Change mouse cursor on hover */
+}
+
+.leaderboard {
+    position: absolute;
+    /* Absolute position for the leaderboard */
+    top: 0;
+    /* At the top of the container */
+    right: 0;
+    /* At the right of the container */
+    margin: 10px;
+    /* Add some space from the edges */
+    color: white;
+    /* Assuming a light color for visibility on a dark background */
+    font-size: 1.5em;
+    /* Larger text size for visibility */
+    cursor: default;
+    /* Ensure the cursor is default when hovering over the text */
+}

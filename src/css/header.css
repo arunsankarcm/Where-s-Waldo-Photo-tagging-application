@@ -1,0 +1,43 @@
+/* Assuming that your header has a class of 'header' */
+.header {
+    display: flex;
+    /* Use flexbox for layout */
+    align-items: center;
+    /* Align items vertically */
+    justify-content: flex-start;
+    /* Align items to the start (left side) */
+    width: 100%;
+    /* Header spans the full width of the screen */
+    padding: 10px 0;
+    /* Add some vertical padding, no horizontal padding */
+    box-sizing: border-box;
+    /* Include padding and border in the element's size */
+    background-color: #6e4f4f;
+    /* Or any background color you prefer */
+}
+
+/* Container for the images */  
+.image-container {
+    display: flex;
+    /* Use flexbox for layout */
+    align-items: center;
+    /* Align images vertically */
+    margin-left: 40px;
+    
+}
+
+/* Style for each image */
+.header-image {
+    margin-right: 50px;
+    /* Space between images */
+    /* If you want to set specific dimensions for the images */
+    width: auto;
+    /* You can set a specific width if required */
+    height: 50px;
+    /* Adjust height as needed */
+}
+
+/* Remove margin from the last image */
+.header-image:last-child {
+    margin-right: 0;
+}
