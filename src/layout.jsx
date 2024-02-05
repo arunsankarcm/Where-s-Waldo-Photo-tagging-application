@@ -2,8 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import Header from "./header";
 
 const Layout = () => {
-    const [showTagBox, setShowTagBox] = useState(false);
-    const [position, setPosition] = useState({ x: 0, y: 0 });   
+    const [showList, setShowList] = useState(false);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [listItems, setListItems] = useState([
+        { src: 'waldo.png', alt: 'Description 1', text: 'Waldo' },
+        { src: 'santa.png', alt: 'Description 1', text: 'Santa' },
+        { src: 'conny.png', alt: 'Description 2', text: 'Conny' },
+    ]);
     const photoRef = useRef(null);
 
     const handlePhotoClick = (e) => {
@@ -12,13 +17,13 @@ const Layout = () => {
         const y = e.clientY - bounds.top + photoRef.current.scrollTop;
 
         setPosition({ x, y });
-        setShowTagBox(true);
+        setShowList(prevShowList => !prevShowList);
     };
 
     useEffect(() => {
         const handleClickAway = (e) => {
             if (photoRef.current && !photoRef.current.contains(e.target)) {
-                setShowTagBox(false);
+                setShowList(false);
             }
         };
 
@@ -51,27 +56,32 @@ const Layout = () => {
                     }}
                 />
 
-                {showTagBox && (
-                    <div
+                {showList && (
+                    <ul
                         style={{
                             position: 'absolute',
                             top: position.y,
                             left: position.x,
-                            // Add more styling as needed for the tag box
+                            listStyleType: 'none',
+                            padding: 0,
+                            margin: 0,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            borderRadius: '8px',
+                            overflow: 'hidden',
+                            zIndex: 2,
                         }}
                     >
-                        <div
-                            style={{
-                                width: '10px',  // Size of the pointer
-                                height: '10px', // Size of the pointer
-                                backgroundColor: 'red', // Pointer color
-                                borderRadius: '50%', // Makes the div circular
-                                position: 'absolute',
-                                transform: 'translate(-50%, -50%)' // Center the pointer on the click position
-                            }}
-                        ></div>
-                        {/* You can still include dropdown menu or tagging options here */}
-                    </div>
+                        {listItems.map((item, index) => (
+                            <li key={index} style={{ display: 'flex', alignItems: 'center', margin: '10px', textAlign: 'center' }}>
+                                <img
+                                    src={item.src}
+                                    alt={item.alt}
+                                    style={{ width: '45px', height: '45px' }} 
+                                />
+                                <span style={{ color: 'white' }}>{item.text}</span> 
+                            </li>
+                        ))}
+                    </ul>
                 )}
             </div>
         </div>
