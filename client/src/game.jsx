@@ -1,9 +1,12 @@
 import React from 'react';
 import StartScreen from './startscreen';
+import { useNavigate } from 'react-router-dom'; 
+
 
 const Game = () => {
+    const navigate = useNavigate();
     const handleStart = () => {
-        // Implement start game logic or navigation here
+        navigate('/play')
         console.log('Game starting...');
     };
 
