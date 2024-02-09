@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Header from "./header";
+import axios from 'axios';
 
 const Layout = () => {
     const [showList, setShowList] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [listItems, setListItems] = useState([
-        { src: 'waldo.png', alt: 'Description 1', text: 'Waldo' },
-        { src: 'santa.png', alt: 'Description 1', text: 'Santa' },
-        { src: 'conny.png', alt: 'Description 2', text: 'Conny' },
+        { src: 'waldo.png', alt: 'Waldo', text: 'Waldo' },
+        { src: 'santa.png', alt: 'Santa', text: 'Santa' },
+        { src: 'conny.png', alt: 'Conny', text: 'Conny' },
     ]);
     const photoRef = useRef(null);
 
@@ -33,6 +34,55 @@ const Layout = () => {
         };
     }, []);
 
+    const handleListItemClick = (characterName, event) => {
+        event.stopPropagation(); 
+        verifyClick(characterName);
+        setShowList(false); // Hide the list after selection
+    };
+
+    const verifyClick = async (characterName) => {
+        try {
+            const photoId = "65c32d23bf10acbc381abca1"; // This should be dynamic based on your application's context
+            const payload = {
+                characterName, // This is the character name sent from the clicked list item
+                x: position.x,
+                y: position.y
+            };
+
+            // Log the payload to see what's being sent
+            console.log("Payload sent to backend:", payload);
+
+            const response = await axios.post(
+                `http://localhost:3000/photo/${photoId}/verify`,
+                payload,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            const data = response.data;
+            if (data.correct) {
+                console.log("Correct!");
+                setShowList(false);
+                alert("Correct!");
+                setListItems(prevItems => prevItems.filter(item => item.text !== characterName));
+
+            } else {
+                console.log("Try again!");
+                setShowList(false);
+                alert("Try again!");
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert("Error occurred while verifying.");
+        }
+    };
+
+
+
+
     return (
         <div>
             <Header />
@@ -45,10 +95,11 @@ const Layout = () => {
                     position: 'relative'
                 }}
                 onClick={handlePhotoClick}
+                role="presentation"
             >
                 <img
                     src="waldo.jpg"
-                    alt="Taggable"
+                    alt="A scene where characters need to be found"
                     style={{
                         display: 'block',
                         maxWidth: 'none',
@@ -72,13 +123,19 @@ const Layout = () => {
                         }}
                     >
                         {listItems.map((item, index) => (
-                            <li key={index} style={{ display: 'flex', alignItems: 'center', margin: '10px', textAlign: 'center' }}>
+                            <li
+                                key={index}
+                                style={{ display: 'flex', alignItems: 'center', margin: '10px', textAlign: 'center', cursor: 'pointer' }}
+                                onClick={(event) => handleListItemClick(item.text, event)}
+                                role="button"
+                                aria-label={`Find ${item.alt}`}
+                            >
                                 <img
                                     src={item.src}
                                     alt={item.alt}
-                                    style={{ width: '45px', height: '45px' }} 
+                                    style={{ width: '45px', height: '45px' }}
                                 />
-                                <span style={{ color: 'white' }}>{item.text}</span> 
+                                <span style={{ color: 'white', marginLeft: '10px' }}>{item.text}</span>
                             </li>
                         ))}
                     </ul>
