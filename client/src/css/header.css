@@ -4,8 +4,8 @@
     /* Use flexbox for layout */
     align-items: center;
     /* Align items vertically */
-    justify-content: flex-start;
-    /* Align items to the start (left side) */
+    justify-content: space-between;
+        /* Aligns children to the sides */    
     width: 100%;
     /* Header spans the full width of the screen */
     padding: 10px 0;
@@ -40,4 +40,9 @@
 /* Remove margin from the last image */
 .header-image:last-child {
     margin-right: 0;
+}
+
+.timer-container {
+    margin-right: 20px;
+    color: aliceblue;
 }

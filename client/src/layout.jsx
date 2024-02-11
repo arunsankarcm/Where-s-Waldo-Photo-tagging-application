@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Header from "./header";
+import WinScreen from './win';
 import axios from 'axios';
+
 
 const Layout = () => {
     const [showList, setShowList] = useState(false);
@@ -10,8 +12,40 @@ const Layout = () => {
         { src: 'santa.png', alt: 'Santa', text: 'Santa' },
         { src: 'conny.png', alt: 'Conny', text: 'Conny' },
     ]);
+    const [timer, setTimer] = useState(0);
+    const [timerActive, setTimerActive] = useState(true);
     const photoRef = useRef(null);
+    const [hasWon, setHasWon] = useState(false);
+    const [elapsedTime, setElapsedTime] = useState(0);
 
+    const resetGame = () => {
+        // Reset all the game state to initial values
+        setShowList(false);
+        setHasWon(false);
+        setTimerActive(true);
+        setTimer(0);
+        setPosition({ x: 0, y: 0 });
+        setListItems([
+            { src: 'waldo.png', alt: 'Waldo', text: 'Waldo' },
+            { src: 'santa.png', alt: 'Santa', text: 'Santa' },
+            { src: 'conny.png', alt: 'Conny', text: 'Conny' },
+        ]);
+    };
+
+   
+    useEffect(() => {
+        let interval;
+
+        if (timerActive) {
+            interval = setInterval(() => {
+                setTimer(prevTimer => prevTimer + 1);
+            }, 1000);
+        }
+
+        return () => clearInterval(interval);
+    }, [timerActive]);
+
+        
     const handlePhotoClick = (e) => {
         const bounds = photoRef.current.getBoundingClientRect();
         const x = e.clientX - bounds.left + photoRef.current.scrollLeft;
@@ -40,6 +74,15 @@ const Layout = () => {
         setShowList(false); // Hide the list after selection
     };
 
+    useEffect(() => {
+        if (listItems.length === 0) {
+            setHasWon(true);
+            setTimerActive(false);
+            setElapsedTime(timer);
+        }
+    }, [listItems, timer]);
+
+
     const verifyClick = async (characterName) => {
         try {
             const photoId = "65c32d23bf10acbc381abca1"; // This should be dynamic based on your application's context
@@ -65,13 +108,11 @@ const Layout = () => {
             const data = response.data;
             if (data.correct) {
                 console.log("Correct!");
-                setShowList(false);
                 alert("Correct!");
+                // Remove the found character from the list
                 setListItems(prevItems => prevItems.filter(item => item.text !== characterName));
-
             } else {
                 console.log("Try again!");
-                setShowList(false);
                 alert("Try again!");
             }
         } catch (error) {
@@ -81,11 +122,9 @@ const Layout = () => {
     };
 
 
-
-
     return (
         <div>
-            <Header />
+            <Header timer={timer} />
             <div
                 ref={photoRef}
                 style={{
@@ -141,6 +180,7 @@ const Layout = () => {
                     </ul>
                 )}
             </div>
+            <WinScreen show={hasWon} time={elapsedTime} onNewGame={resetGame} />
         </div>
     );
 };
