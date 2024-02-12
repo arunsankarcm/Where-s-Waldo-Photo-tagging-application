@@ -7,7 +7,7 @@ const Leaderboard = () => {
     const [scores, setScores] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/photo/scores')
+        axios.get('https://waldo-backend-saoq.onrender.com/photo/scores')
             .then(response => {
                   
                 setScores(response.data);

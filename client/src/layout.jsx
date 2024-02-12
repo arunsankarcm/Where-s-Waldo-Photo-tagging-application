@@ -93,7 +93,7 @@ const Layout = () => {
             };
 
             const response = await axios.post(
-                `http://localhost:3000/photo/${photoId}/verify`,
+                `https://waldo-backend-saoq.onrender.com/photo/${photoId}/verify`,
                 payload,
                 {
                     headers: {

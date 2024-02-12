@@ -8,7 +8,7 @@ const WinScreen = ({ show, time, onNewGame }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/photo/submit-score', { name, time });
+            const response = await axios.post('https://waldo-backend-saoq.onrender.com/photo/submit-score', { name, time });
             console.log(response.data);   
             onNewGame();   
         } catch (error) {
