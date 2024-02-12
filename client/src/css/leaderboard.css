@@ -1,0 +1,61 @@
+/* Leaderboard.css */
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    /* Black background */
+}
+
+.leaderboard {
+    width: 80%;
+    /* Adjust width as desired */
+    max-width: 600px;
+    /* Or any max-width you prefer */
+    margin: auto;
+    /* Center in the available space */
+    background-color: #000;
+    /* Set the background color of the leaderboard to black */
+    color: #fff;
+    /* White text color */
+    border: 2px solid #fff;
+    /* White border */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    /* Subtle white shadow for depth */
+    text-align: center;
+}
+
+.leaderboard h1 {
+    margin-bottom: 1rem;
+}
+
+.leaderboard ol {
+    list-style: none;
+    padding: 0;
+}
+
+.leaderboard li {
+    background-color: transparent;
+    /* No background to show the body's black background */
+    border: 1px solid #fff;
+    /* White border */
+    margin-bottom: 0.5rem;
+    /* Space between items */
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.leaderboard-container {
+    height: 100vh;
+    /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    /* Black background */
+}

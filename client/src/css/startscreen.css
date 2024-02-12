@@ -41,7 +41,7 @@ body {
     /* Change mouse cursor on hover */
 }
 
-.leaderboard {
+.leader-board {
     position: absolute;
     /* Absolute position for the leaderboard */
     top: 0;

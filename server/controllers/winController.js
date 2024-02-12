@@ -11,3 +11,12 @@ exports.winScreen = async (req,res) => {
         res.status(500).send("Error saving score");
     }
 }
+
+exports.getScore = async (req,res) => {
+    try {
+        const scores = await Score.find({}).sort({ time: 1 }).exec(); // Sort by time in ascending order
+        res.json(scores);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching scores", error: error });
+    }
+}

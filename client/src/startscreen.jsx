@@ -1,14 +1,18 @@
+  
 import React from 'react';
-import './css/startscreen.css'; 
+import './css/startscreen.css';
 
-const StartScreen = ({ onStart }) => {
+const StartScreen = ({ onStart, onLeaderboard }) => {
     return (
-        <div className="startScreen" onClick={onStart}>
-            <div className='leaderboard'>LEADERBOARD</div>
+        <div className="startScreen">
+            <div className='leader-board' onClick={onLeaderboard}>
+                LEADERBOARD
+            </div>
             <img
-                src="/start-game.jpg" 
+                src="/start-game.jpg"
                 alt="Start Game"
                 className="startImage"
+                onClick={onStart}
             />
         </div>
     );

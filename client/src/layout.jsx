@@ -19,7 +19,7 @@ const Layout = () => {
     const [elapsedTime, setElapsedTime] = useState(0);
 
     const resetGame = () => {
-        // Reset all the game state to initial values
+          
         setShowList(false);
         setHasWon(false);
         setTimerActive(true);
@@ -71,7 +71,7 @@ const Layout = () => {
     const handleListItemClick = (characterName, event) => {
         event.stopPropagation(); 
         verifyClick(characterName);
-        setShowList(false); // Hide the list after selection
+        setShowList(false);   
     };
 
     useEffect(() => {
@@ -85,15 +85,12 @@ const Layout = () => {
 
     const verifyClick = async (characterName) => {
         try {
-            const photoId = "65c32d23bf10acbc381abca1"; // This should be dynamic based on your application's context
+            const photoId = "65c32d23bf10acbc381abca1";   
             const payload = {
-                characterName, // This is the character name sent from the clicked list item
+                characterName,   
                 x: position.x,
                 y: position.y
             };
-
-            // Log the payload to see what's being sent
-            console.log("Payload sent to backend:", payload);
 
             const response = await axios.post(
                 `http://localhost:3000/photo/${photoId}/verify`,
@@ -109,7 +106,7 @@ const Layout = () => {
             if (data.correct) {
                 console.log("Correct!");
                 alert("Correct!");
-                // Remove the found character from the list
+                  
                 setListItems(prevItems => prevItems.filter(item => item.text !== characterName));
             } else {
                 console.log("Try again!");
