@@ -1,5 +1,5 @@
 
-# Blog Website
+# Where's Waldo?
 
 A Photo tagging web application/game where we have to find specific characters from the image in order to win the game.
 
