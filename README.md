@@ -3,6 +3,9 @@
 
 A Photo tagging web application/game where we have to find specific characters from the image in order to win the game.
 
+## Live preview
+
+https://waldo-phi.vercel.app/
 
 
 ## Tech Stack
@@ -304,6 +307,8 @@ Start the server for server-side
 ```bash
   npm  start
 ```
+
+
 
 Start the server for client-side
 
